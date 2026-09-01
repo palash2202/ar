@@ -1,0 +1,179 @@
+```html
+<!doctype html>
+<html>
+    <head>
+        <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+        <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+        <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+        <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
+        <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
+
+        <!-- LLM ADDED: Venusaur interaction -->
+        <script>
+            AFRAME.registerComponent('venusaur-interaction', {
+                init: function () {
+
+                    var model = this.el;
+                    var infoPanel = document.querySelector('#venusaur-info-panel');
+                    var closeButton = document.querySelector('#close-button');
+
+                    // Open information when Venusaur is clicked
+                    model.addEventListener('click', function () {
+                        infoPanel.setAttribute('visible', true);
+                    });
+
+                    // Close information panel
+                    closeButton.addEventListener('click', function () {
+                        infoPanel.setAttribute('visible', false);
+                    });
+                }
+            });
+        </script>
+    </head>
+
+    <body style="margin: 0; overflow: hidden;">
+
+        <a-scene
+            vr-mode-ui="enabled: false;"
+            loading-screen="enabled: false;"
+            renderer="logarithmicDepthBuffer: true;"
+            arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+            id="scene"
+            embedded
+            gesture-detector
+        >
+
+            <a-assets>
+                <a-asset-item
+                    id="animated-asset"
+                    src="assets/asset.gltf"
+                ></a-asset-item>
+            </a-assets>
+
+            <a-marker
+                id="animated-marker"
+                type="pattern"
+                preset="custom"
+                url="assets/marker.patt"
+                raycaster="objects: .clickable"
+                emitevents="true"
+                cursor="fuse: false; rayOrigin: mouse;"
+                id="markerA"
+            >
+
+                <!-- ORIGINAL AR.JS STUDIO MODEL -->
+                <a-entity
+                    id="bowser-model"
+                    scale="0.006423982414600819 0.006423982414600819 0.006423982414600819"
+                    animation-mixer="loop: repeat"
+                    gltf-model="#animated-asset"
+                    class="clickable"
+                    gesture-handler
+                    venusaur-interaction
+                ></a-entity>
+
+
+                <!-- LLM ADDED: VENUSAUR INFORMATION PANEL -->
+                <a-entity
+                    id="venusaur-info-panel"
+                    visible="false"
+                    position="0 1.1 0"
+                >
+
+                    <!-- Background -->
+                    <a-plane
+                        width="1.8"
+                        height="1.45"
+                        color="#17251b"
+                        opacity="0.96"
+                    ></a-plane>
+
+                    <!-- Title -->
+                    <a-text
+                        value="VENUSAUR"
+                        align="center"
+                        color="#ffffff"
+                        width="4"
+                        position="0 0.53 0.02"
+                    ></a-text>
+
+                    <!-- Type -->
+                    <a-text
+                        value="TYPE"
+                        align="center"
+                        color="#9bd18b"
+                        width="3"
+                        position="0 0.30 0.02"
+                    ></a-text>
+
+                    <a-text
+                        value="GRASS  /  POISON"
+                        align="center"
+                        color="#ffffff"
+                        width="2.5"
+                        position="0 0.15 0.02"
+                    ></a-text>
+
+                    <!-- Weakness -->
+                    <a-text
+                        value="WEAKNESSES"
+                        align="center"
+                        color="#9bd18b"
+                        width="2.5"
+                        position="0 -0.08 0.02"
+                    ></a-text>
+
+                    <a-text
+                        value="FIRE  ICE  FLYING  PSYCHIC"
+                        align="center"
+                        color="#ffffff"
+                        width="1.8"
+                        position="0 -0.23 0.02"
+                    ></a-text>
+
+                    <!-- Ash connection -->
+                    <a-text
+                        value="ASH'S VENUSAUR"
+                        align="center"
+                        color="#f5d76e"
+                        width="2.8"
+                        position="0 -0.45 0.02"
+                    ></a-text>
+
+                    <a-text
+                        value="A strong bond built through trust."
+                        align="center"
+                        color="#dddddd"
+                        width="1.8"
+                        position="0 -0.60 0.02"
+                    ></a-text>
+
+                    <!-- Close button -->
+                    <a-plane
+                        id="close-button"
+                        class="clickable"
+                        position="0 -0.82 0.03"
+                        width="0.65"
+                        height="0.22"
+                        color="#ffffff"
+                    ></a-plane>
+
+                    <a-text
+                        value="CLOSE"
+                        align="center"
+                        color="#17251b"
+                        width="1.7"
+                        position="0 -0.82 0.04"
+                    ></a-text>
+
+                </a-entity>
+
+            </a-marker>
+
+            <a-entity camera></a-entity>
+
+        </a-scene>
+
+    </body>
+</html>
+```
