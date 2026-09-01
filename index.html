@@ -6,37 +6,6 @@
         <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
         <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
         <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
-
-        <!-- LLM ADDED INTERACTION -->
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-
-                var scene = document.querySelector('#scene');
-
-                scene.addEventListener('loaded', function () {
-
-                    var model = document.querySelector('#bowser-model');
-                    var infoPanel = document.querySelector('#venusaur-info-panel');
-                    var closeButton = document.querySelector('#close-button');
-
-                    /*
-                     * When Venusaur is tapped, show information.
-                     */
-                    model.addEventListener('click', function () {
-                        infoPanel.setAttribute('visible', 'true');
-                    });
-
-                    /*
-                     * Close the information panel.
-                     */
-                    closeButton.addEventListener('click', function () {
-                        infoPanel.setAttribute('visible', 'false');
-                    });
-
-                });
-
-            });
-        </script>
     </head>
 
     <body style="margin: 0; overflow: hidden;">
@@ -58,7 +27,6 @@
                 ></a-asset-item>
             </a-assets>
 
-
             <a-marker
                 id="animated-marker"
                 type="pattern"
@@ -70,7 +38,6 @@
                 id="markerA"
             >
 
-                <!-- ORIGINAL AR.JS STUDIO MODEL -->
                 <a-entity
                     id="bowser-model"
                     scale="0.006423982414600819 0.006423982414600819 0.006423982414600819"
@@ -80,98 +47,8 @@
                     gesture-handler
                 ></a-entity>
 
-
-                <!-- LLM ADDED: VENUSAUR INFORMATION PANEL -->
-                <a-entity
-                    id="venusaur-info-panel"
-                    visible="false"
-                    position="0 1.3 0"
-                >
-
-                    <!-- Panel -->
-                    <a-plane
-                        width="1.8"
-                        height="1.35"
-                        color="#17351f"
-                        opacity="0.95"
-                    ></a-plane>
-
-                    <!-- Title -->
-                    <a-text
-                        value="VENUSAUR"
-                        align="center"
-                        color="#ffffff"
-                        width="4"
-                        position="0 0.50 0.02"
-                    ></a-text>
-
-                    <!-- Type -->
-                    <a-text
-                        value="TYPE: GRASS / POISON"
-                        align="center"
-                        color="#9bd18b"
-                        width="2.5"
-                        position="0 0.25 0.02"
-                    ></a-text>
-
-                    <!-- Weakness -->
-                    <a-text
-                        value="WEAKNESSES"
-                        align="center"
-                        color="#9bd18b"
-                        width="2.4"
-                        position="0 0.03 0.02"
-                    ></a-text>
-
-                    <a-text
-                        value="FIRE  ICE  FLYING  PSYCHIC"
-                        align="center"
-                        color="#ffffff"
-                        width="1.7"
-                        position="0 -0.13 0.02"
-                    ></a-text>
-
-                    <!-- Ash connection -->
-                    <a-text
-                        value="ASH'S VENUSAUR"
-                        align="center"
-                        color="#f5d76e"
-                        width="2.5"
-                        position="0 -0.36 0.02"
-                    ></a-text>
-
-                    <a-text
-                        value="Ash has a strong bond with Venusaur."
-                        align="center"
-                        color="#ffffff"
-                        width="1.65"
-                        position="0 -0.55 0.02"
-                    ></a-text>
-
-                    <!-- Close button -->
-                    <a-plane
-                        id="close-button"
-                        class="clickable"
-                        width="0.65"
-                        height="0.22"
-                        color="#ffffff"
-                        position="0 -0.78 0.03"
-                    ></a-plane>
-
-                    <a-text
-                        value="CLOSE"
-                        align="center"
-                        color="#17351f"
-                        width="1.6"
-                        position="0 -0.78 0.04"
-                    ></a-text>
-
-                </a-entity>
-
             </a-marker>
 
-
-            <!-- CAMERA -->
             <a-entity camera></a-entity>
 
         </a-scene>
